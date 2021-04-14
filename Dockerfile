@@ -1,7 +1,6 @@
-FROM alpine:3.10
+FROM rakudo-star:2020.10-alpine
 
-# TODO: install packages required to run the tests
-# RUN apk add --no-cache coreutils
+RUN apk add --no-cache coreutils jq
 
 WORKDIR /opt/test-runner
 COPY . .

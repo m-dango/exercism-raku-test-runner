@@ -33,8 +33,7 @@ echo "${slug}: testing..."
 
 # Run the tests for the provided implementation file and redirect stdout and
 # stderr to capture it
-# TODO: Replace 'RUN_TESTS_COMMAND' with the command to run the tests
-test_output=$(RUN_TESTS_COMMAND 2>&1)
+test_output=$(prove6 "${input_dir}" 2>&1)
 
 # Write the results.json file based on the exit code of the command that was 
 # just executed that tested the implementation file

@@ -1,0 +1,5 @@
+{
+  "version": 1,
+  "status": "fail",
+  "output": "bin/run.sh: line 39: RUN_TESTS_COMMAND: not found"
+}
