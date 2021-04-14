@@ -1,0 +1,43 @@
+#!/usr/bin/env raku
+use Test;
+use JSON::Fast;
+use lib $?FILE.IO.dirname;
+use Leap;
+plan 9;
+
+my @test-cases = from-json($=pod.pop.contents).List;
+for Date, DateTime {
+  .^method_table<is-leap-year>.wrap: sub (|) {
+    bail-out 'Built-in `is-leap-year` method is not allowed for this exercise.';
+  };
+}
+
+for @test-cases -> %case {
+  subtest %case<description>, {
+    plan 2;
+    isa-ok ( my $result := is-leap-year %case<input><year> ), Bool;
+    is-deeply $result, %case<expected>, 'Result matches expected';
+  }
+}
+
+=head2 Test Cases
+=begin code
+[
+  {
+    "description": "year not divisible by 4 in common year",
+    "expected": false,
+    "input": {
+      "year": 2015
+    },
+    "property": "leapYear"
+  },
+  {
+    "description": "year divisible by 4, not divisible by 100 in leap year",
+    "expected": true,
+    "input": {
+      "year": 1996
+    },
+    "property": "leapYear"
+  }  
+]
+=end code
