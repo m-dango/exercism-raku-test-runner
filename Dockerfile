@@ -1,6 +1,10 @@
-FROM rakudo-star:2020.10-alpine
+FROM rakudo-star:2020.10
 
-RUN apk add --no-cache coreutils jq
+RUN apt-get update && \
+    apt-get install -y jq && \
+    apt-get purge --auto-remove -y && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
 WORKDIR /opt/test-runner
 COPY . .
