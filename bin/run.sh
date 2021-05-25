@@ -43,7 +43,7 @@ else
     # Manually add colors to the output to help scanning the output for errors
     colorized_test_output=$(echo "${test_output}" | GREP_COLOR='01;31' grep --color=always -E -e '^# Failed.*|$')
 
-    jq -n --arg output "${colorized_test_output}" '{version: 1, status: "fail", output: $output}' > ${results_file}
+    jq -n --arg output "${colorized_test_output}" '{version: 1, status: "fail", message: $output}' > ${results_file}
 fi
 
 echo "${slug}: done"
