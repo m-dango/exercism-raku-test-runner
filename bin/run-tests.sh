@@ -20,11 +20,11 @@ for test_dir in tests/*; do
     results_file_path="${test_dir_path}/results.json"
     expected_results_file_path="${test_dir_path}/expected_results.json"
 
-    bin/run.sh "${test_dir_name}" "${test_dir_path}" "${test_dir_path}"
+    bin/run.sh leap "${test_dir_path}" "${test_dir_path}"
 
     # Normalize the results file
     sed -i -E \
-      -e 's/[0-9]+ wallclock secs//g' \
+      -e 's/,\s+[0-9]+ wallclock secs.*?\\n/\\n/g' \
       -e "s~${test_dir_path}~/solution~g" \
       "${results_file_path}"
 
