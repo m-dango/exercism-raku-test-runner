@@ -1,4 +1,4 @@
-FROM rakudo-star:2021.04
+FROM rakudo-star:2022.07
 
 RUN apt-get update && \
     apt-get install -y jq && \
