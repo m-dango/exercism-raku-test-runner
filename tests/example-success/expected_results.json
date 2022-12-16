@@ -3,7 +3,7 @@
    "tests" : [
       {
          "name" : "year not divisible by 4 in common year",
-         "output" : null,
+         "output" : "OUTPUT TEST\n",
          "status" : "pass"
       },
       {
