@@ -1,5 +1,5 @@
 {
-  "version": 1,
-  "status": "fail",
-  "message": "\u001b[01;31m\u001b[KBailout called.  Further testing stopped:  Built-in `is-leap-year` method is not allowed for this exercise.\u001b[m\u001b[K\nFAILED--Further testing stopped: Built-in `is-leap-year` method is not allowed for this exercise."
+  "message": "Creating a Date(Time) object is not allowed for this exercise.",
+  "status": "error",
+  "version": 2
 }

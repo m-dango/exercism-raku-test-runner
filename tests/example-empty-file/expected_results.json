@@ -1,5 +1,5 @@
 {
-  "version": 1,
-  "status": "fail",
-  "message": "/solution/leap.rakutest .. \n\u001b[31m===\u001b[0mSORRY!\u001b[31m===\u001b[0m Error while compiling /solution/leap.rakutest\nUndeclared routine:\n    is-leap-year used at line 18\n\nDubious, test returned 1 (wstat 256, 0x100)\nNo subtests run \n\nTest Summary Report\n-------------------\n/solution/leap.rakutest (Wstat: 256 Tests: 0 Failed: 0)\n  Non-zero exit status: 1\n  Parse errors: No plan found in TAP output\nFiles=1, Tests=0\nResult: FAIL"
+  "message": "\u001b[31m===\u001b[0mSORRY!\u001b[31m===\u001b[0m Error while compiling /solution/leap.rakutest\nUndeclared routine:\n    is-leap-year used at lines 13, 20, 27, 34, 41, 48, 55, 62, 69\n",
+  "status": "error",
+  "version": 2
 }

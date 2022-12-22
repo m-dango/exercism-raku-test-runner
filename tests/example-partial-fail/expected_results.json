@@ -1,5 +1,45 @@
 {
-  "version": 1,
+  "message": null,
   "status": "fail",
-  "message": "/solution/leap.rakutest .. \n1..9\n# Subtest: year not divisible by 4 in common year\n    1..2\n    ok 1 - The object is-a 'Bool'\n    ok 2 - Result matches expected\nok 1 - year not divisible by 4 in common year\n# Subtest: year divisible by 2, not divisible by 4 in common year\n    1..2\n    ok 1 - The object is-a 'Bool'\n    ok 2 - Result matches expected\nok 2 - year divisible by 2, not divisible by 4 in common year\n# Subtest: year divisible by 4, not divisible by 100 in leap year\n    1..2\n    ok 1 - The object is-a 'Bool'\n    ok 2 - Result matches expected\nok 3 - year divisible by 4, not divisible by 100 in leap year\n# Subtest: year divisible by 4 and 5 is still a leap year\n    1..2\n    ok 1 - The object is-a 'Bool'\n    ok 2 - Result matches expected\nok 4 - year divisible by 4 and 5 is still a leap year\n# Subtest: year divisible by 100, not divisible by 400 in common year\n    1..2\n    ok 1 - The object is-a 'Bool'\n    ok 2 - Result matches expected\nok 5 - year divisible by 100, not divisible by 400 in common year\n# Subtest: year divisible by 100 but not by 3 is still not a leap year\n    1..2\n    ok 1 - The object is-a 'Bool'\n    ok 2 - Result matches expected\nok 6 - year divisible by 100 but not by 3 is still not a leap year\n# Subtest: year divisible by 400 in leap year\n    1..2\n    ok 1 - The object is-a 'Bool'\n    not ok 2 - Result matches expected\n    # Failed test 'Result matches expected'\n    # at /solution/leap.rakutest line 19\n    # expected: Bool::True\n    #      got: Bool::False\n    # You failed 1 test of 2\n\u001b[01;31m\u001b[Knot ok 7 - year divisible by 400 in leap year\u001b[m\u001b[K\n\u001b[01;31m\u001b[K# Failed test 'year divisible by 400 in leap year'\u001b[m\u001b[K\n# at /solution/leap.rakutest line 16\n# Subtest: year divisible by 400 but not by 125 is still a leap year\n    1..2\n    ok 1 - The object is-a 'Bool'\n    not ok 2 - Result matches expected\n    # Failed test 'Result matches expected'\n    # at /solution/leap.rakutest line 19\n    # expected: Bool::True\n    #      got: Bool::False\n    # You failed 1 test of 2\n\u001b[01;31m\u001b[Knot ok 8 - year divisible by 400 but not by 125 is still a leap year\u001b[m\u001b[K\n\u001b[01;31m\u001b[K# Failed test 'year divisible by 400 but not by 125 is still a leap year'\u001b[m\u001b[K\n# at /solution/leap.rakutest line 16\n# Subtest: year divisible by 200, not divisible by 400 in common year\n    1..2\n    ok 1 - The object is-a 'Bool'\n    ok 2 - Result matches expected\nok 9 - year divisible by 200, not divisible by 400 in common year\n# You failed 2 tests of 9\nDubious, test returned 2 (wstat 512, 0x200)\nFailed 2/9 subtests \n\nTest Summary Report\n-------------------\n/solution/leap.rakutest (Wstat: 512 Tests: 9 Failed: 2)\n  Failed tests:  7-8\n  Non-zero exit status: 2\nFiles=1, Tests=9\nResult: FAIL"
+  "tests": [
+    {
+      "name": "year not divisible by 4 in common year",
+      "status": "pass"
+    },
+    {
+      "name": "year divisible by 2, not divisible by 4 in common year",
+      "status": "pass"
+    },
+    {
+      "name": "year divisible by 4, not divisible by 100 in leap year",
+      "status": "pass"
+    },
+    {
+      "name": "year divisible by 4 and 5 is still a leap year",
+      "status": "pass"
+    },
+    {
+      "name": "year divisible by 100, not divisible by 400 in common year",
+      "status": "pass"
+    },
+    {
+      "name": "year divisible by 100 but not by 3 is still not a leap year",
+      "status": "pass"
+    },
+    {
+      "message": "# Failed test 'year divisible by 400 is leap year'\n# at /solution/leap.rakutest line 54\n# expected: Bool::True\n#  matcher: 'infix:<eqv>'\n#      got: Bool::False\n",
+      "name": "year divisible by 400 is leap year",
+      "status": "fail"
+    },
+    {
+      "message": "# Failed test 'year divisible by 400 but not by 125 is still a leap year'\n# at /solution/leap.rakutest line 61\n# expected: Bool::True\n#  matcher: 'infix:<eqv>'\n#      got: Bool::False\n",
+      "name": "year divisible by 400 but not by 125 is still a leap year",
+      "status": "fail"
+    },
+    {
+      "name": "year divisible by 200, not divisible by 400 in common year",
+      "status": "pass"
+    }
+  ],
+  "version": 2
 }

@@ -31,19 +31,8 @@ mkdir -p "${output_dir}"
 
 echo "${slug}: testing..."
 
-# Run the tests for the provided implementation file and redirect stdout and
-# stderr to capture it
-test_output=$(prove -e raku -m -v "${input_dir}/${slug}.rakutest" 2>&1)
-
-# Write the results.json file based on the exit code of the command that was 
-# just executed that tested the implementation file
-if [ $? -eq 0 ]; then
-    jq -n '{version: 1, status: "pass"}' > ${results_file}
-else
-    # Manually add colors to the output to help scanning the output for errors
-    colorized_test_output=$(echo "${test_output}" | GREP_COLOR='01;31' grep --color=always -P -e '^(# Failed.*|Bailout called.*|not ok \d+.*)|$')
-
-    jq -n --arg output "${colorized_test_output}" '{version: 1, status: "fail", message: $output}' > ${results_file}
-fi
+# Run the tests and transform to results
+chmod +x "${input_dir}/${slug}.rakutest"
+"${input_dir}/${slug}.rakutest" 2>&1 | tap-parser -j 0 | bin/transform-results.raku > ${results_file}
 
 echo "${slug}: done"
