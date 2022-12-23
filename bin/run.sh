@@ -34,6 +34,7 @@ echo "${slug}: testing..."
 # Run the tests and transform to results
 test_file="${input_dir}/${slug}.rakutest"
 chmod +x $test_file
+export HOME='/tmp'
 $test_file 2>&1 | tap-parser -j 0 > "${output_dir}/tap.json"
 bin/transform-results.raku --tap-results="${output_dir}/tap.json" --output-file="${results_file}" --test-file=$test_file
 
