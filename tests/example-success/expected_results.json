@@ -5,39 +5,48 @@
     {
       "name": "year not divisible by 4 in common year",
       "output": "OUTPUT TEST\n",
-      "status": "pass"
+      "status": "pass",
+      "test_code": "cmp-ok(\n    is-leap-year(2015),\n    \"eqv\",\n    False,\n    \"year not divisible by 4 in common year\",\n);"
     },
     {
       "name": "year divisible by 2, not divisible by 4 in common year",
-      "status": "pass"
+      "status": "pass",
+      "test_code": "cmp-ok(\n    is-leap-year(1970),\n    \"eqv\",\n    False,\n    \"year divisible by 2, not divisible by 4 in common year\",\n);"
     },
     {
       "name": "year divisible by 4, not divisible by 100 in leap year",
-      "status": "pass"
+      "status": "pass",
+      "test_code": "cmp-ok(\n    is-leap-year(1996),\n    \"eqv\",\n    True,\n    \"year divisible by 4, not divisible by 100 in leap year\",\n);"
     },
     {
       "name": "year divisible by 4 and 5 is still a leap year",
-      "status": "pass"
+      "status": "pass",
+      "test_code": "cmp-ok(\n    is-leap-year(1960),\n    \"eqv\",\n    True,\n    \"year divisible by 4 and 5 is still a leap year\",\n);"
     },
     {
       "name": "year divisible by 100, not divisible by 400 in common year",
-      "status": "pass"
+      "status": "pass",
+      "test_code": "cmp-ok(\n    is-leap-year(2100),\n    \"eqv\",\n    False,\n    \"year divisible by 100, not divisible by 400 in common year\",\n);"
     },
     {
       "name": "year divisible by 100 but not by 3 is still not a leap year",
-      "status": "pass"
+      "status": "pass",
+      "test_code": "cmp-ok(\n    is-leap-year(1900),\n    \"eqv\",\n    False,\n    \"year divisible by 100 but not by 3 is still not a leap year\",\n);"
     },
     {
       "name": "year divisible by 400 is leap year",
-      "status": "pass"
+      "status": "pass",
+      "test_code": "cmp-ok(\n    is-leap-year(2000),\n    \"eqv\",\n    True,\n    \"year divisible by 400 is leap year\",\n);"
     },
     {
       "name": "year divisible by 400 but not by 125 is still a leap year",
-      "status": "pass"
+      "status": "pass",
+      "test_code": "cmp-ok(\n    is-leap-year(2400),\n    \"eqv\",\n    True,\n    \"year divisible by 400 but not by 125 is still a leap year\",\n);"
     },
     {
       "name": "year divisible by 200, not divisible by 400 in common year",
-      "status": "pass"
+      "status": "pass",
+      "test_code": "cmp-ok(\n    is-leap-year(1800),\n    \"eqv\",\n    False,\n    \"year divisible by 200, not divisible by 400 in common year\",\n);"
     }
   ],
   "version": 2

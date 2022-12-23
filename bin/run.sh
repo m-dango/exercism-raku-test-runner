@@ -32,7 +32,9 @@ mkdir -p "${output_dir}"
 echo "${slug}: testing..."
 
 # Run the tests and transform to results
-chmod +x "${input_dir}/${slug}.rakutest"
-"${input_dir}/${slug}.rakutest" 2>&1 | tap-parser -j 0 | bin/transform-results.raku > ${results_file}
+test_file="${input_dir}/${slug}.rakutest"
+chmod +x $test_file
+$test_file 2>&1 | tap-parser -j 0 > "${output_dir}/tap.json"
+bin/transform-results.raku --tap-results="${output_dir}/tap.json" --output-file="${results_file}" --test-file=$test_file
 
 echo "${slug}: done"
