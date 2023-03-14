@@ -1,4 +1,4 @@
-FROM rakudo-star:2022.12
+FROM rakudo-star:2023.02
 
 RUN apt-get update && \
     apt-get install -y npm && \
