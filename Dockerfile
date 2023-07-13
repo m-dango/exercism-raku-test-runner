@@ -1,4 +1,4 @@
-FROM rakudo-star:2023.02
+FROM rakudo-star:2023.06
 
 RUN apt-get update && \
     apt-get install -y npm && \
