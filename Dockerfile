@@ -1,10 +1,6 @@
-FROM rakudo-star:2023.06
+FROM rakudo-star:2023.06-alpine
 
-RUN apt-get update && \
-    apt-get install -y npm && \
-    apt-get purge --auto-remove -y && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
+RUN apk add --no-cache bash jq coreutils nodejs npm
 
 RUN npm install -g tap-parser
 
