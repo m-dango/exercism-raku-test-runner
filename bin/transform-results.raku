@@ -11,29 +11,30 @@ unit sub MAIN (
 my Str:D  $output = '';
 my Bool:D $take   = False;
 my Str:D  @case;
-my Str:D  @tests;
-my Str    $uuid;
+my Str    $case-id;
+
+my %results = :status<error>, :message(Nil), :version(2), :tests([]);
 
 for $test-file.IO.lines(:!chomp) -> $line {
     if $line ~~ /:r :!s '# ' ['begin' || 'case'] ': ' (\S+)/ {
-        $take = True;
-        $uuid = $/[0].Str;
+        $take    = True;
+        $case-id = $/[0].Str;
     }
 
     if $take {
-        @case.push($line.subst(/' # ' \w+ ': ' $uuid/, ''));
+        @case.push($line.subst(/' # ' \w+ ': ' $case-id/, ''));
 
-        if $line ~~ /:r :!s '# ' ['end' || 'case'] ': ' $uuid/ {
+        if $line ~~ /:r :!s '# ' ['end' || 'case'] ': ' $case-id/ {
             $take = False;
-            @tests.push(@case.join.trim);
-            @case = Empty;
-            $uuid = Nil;
+            %results<tests>.push((
+                :test_code(@case.join.trim),
+                :status<error>,
+            ).Hash);
+            @case    = Empty;
+            $case-id = Nil;
         }
     }
 }
-
-my %results = :status(Nil), :message(Nil), :version(2);
-%results<tests> = @tests.map({ (:test_code($_), :status<error>).Hash }).Array;
 
 my $i = 0;
 for from-json($tap-results.IO.slurp).List -> @part {
@@ -58,7 +59,6 @@ for from-json($tap-results.IO.slurp).List -> @part {
         }
 
         when 'bailout' {
-            %results<status>  = 'error';
             %results<message> = @part[1];
             last;
         }
@@ -69,7 +69,6 @@ for from-json($tap-results.IO.slurp).List -> @part {
                 %results<status> = 'fail';
             }
             elsif @part[1]<plan><skipAll> {
-                %results<status>  = 'error';
                 %results<message> = $output;
             }
             else {
