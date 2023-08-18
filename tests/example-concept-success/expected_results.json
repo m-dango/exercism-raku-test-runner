@@ -1,0 +1,55 @@
+{
+  "message": null,
+  "status": "pass",
+  "tests": [
+    {
+      "name": "expected minutes in oven",
+      "status": "pass",
+      "task_id": 1,
+      "test_code": "cmp-ok(\n    EXPECTED-MINUTES-IN-OVEN,\n    '==',\n    40,\n    'expected minutes in oven',\n);"
+    },
+    {
+      "name": "some remaining minutes in oven",
+      "status": "pass",
+      "task_id": 2,
+      "test_code": "cmp-ok(\n    remaining-minutes-in-oven(25),\n    '==',\n    15,\n    'some remaining minutes in oven',\n);"
+    },
+    {
+      "name": "no more remaining minutes in oven",
+      "status": "pass",
+      "task_id": 2,
+      "test_code": "cmp-ok(\n    remaining-minutes-in-oven(40),\n    '==',\n    0,\n    'no more remaining minutes in oven',\n);"
+    },
+    {
+      "name": "preparation time in minutes for one layer",
+      "status": "pass",
+      "task_id": 3,
+      "test_code": "cmp-ok(\n    preparation-time-in-minutes(1),\n    '==',\n    2,\n    'preparation time in minutes for one layer',\n);"
+    },
+    {
+      "name": "preparation time in minutes for multiple layers",
+      "status": "pass",
+      "task_id": 3,
+      "test_code": "cmp-ok(\n    preparation-time-in-minutes(4),\n    '==',\n    8,\n    'preparation time in minutes for multiple layers',\n);"
+    },
+    {
+      "name": "total time in minutes for one layer",
+      "status": "pass",
+      "task_id": 4,
+      "test_code": "cmp-ok(\n    total-time-in-minutes( 1, 30 ),\n    '==',\n    32,\n    'total time in minutes for one layer',\n);"
+    },
+    {
+      "name": "total time in minutes for multiple layers",
+      "status": "pass",
+      "task_id": 4,
+      "test_code": "cmp-ok(\n    total-time-in-minutes( 4, 8 ),\n    '==',\n    16,\n    'total time in minutes for multiple layers',\n);"
+    },
+    {
+      "name": "notification message",
+      "status": "pass",
+      "task_id": 5,
+      "test_code": "cmp-ok(\n    oven-alarm(),\n    'eq',\n    'Ding!',\n    'notification message',\n);"
+    }
+  ],
+  "version": 3
+}

@@ -49,5 +49,5 @@
       "test_code": "cmp-ok(\n    is-leap-year(1800),\n    \"eqv\",\n    False,\n    \"year divisible by 200, not divisible by 400 in common year\",\n);"
     }
   ],
-  "version": 2
+  "version": 3
 }

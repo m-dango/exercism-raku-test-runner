@@ -1,0 +1,41 @@
+{
+  "message": null,
+  "status": "fail",
+  "tests": [
+    {
+      "name": "an empty string",
+      "status": "pass",
+      "test_code": "subtest \"an empty string\" => {\n  cmp-ok(\n      reverse-string(\"\"),\n      \"eq\",\n      \"\",\n      \"reverse once\",\n  );\n  cmp-ok(\n      reverse-string(reverse-string(\"\")),\n      \"eq\",\n      \"\",\n      \"reverse twice\",\n  );\n}"
+    },
+    {
+      "message": "# Subtest: a word\n# Failed test 'reverse once'\n# at /solution/leap.rakutest line 22\n# expected: \"tobor\"\n#  matcher: 'infix:<eq>'\n#      got: \"robot\"\n# You failed 1 test of 2\n# Failed test 'a word'\n# at /solution/leap.rakutest line 21\n",
+      "name": "a word",
+      "status": "fail",
+      "test_code": "subtest \"a word\" => {\n  cmp-ok(\n      reverse-string(\"robot\"),\n      \"eq\",\n      \"tobor\",\n      \"reverse once\",\n  );\n  cmp-ok(\n      reverse-string(reverse-string(\"robot\")),\n      \"eq\",\n      \"robot\",\n      \"reverse twice\",\n  );\n}"
+    },
+    {
+      "message": "# Subtest: a capitalized word\n# Failed test 'reverse once'\n# at /solution/leap.rakutest line 37\n# expected: \"nemaR\"\n#  matcher: 'infix:<eq>'\n#      got: \"Ramen\"\n# You failed 1 test of 2\n# Failed test 'a capitalized word'\n# at /solution/leap.rakutest line 36\n",
+      "name": "a capitalized word",
+      "status": "fail",
+      "test_code": "subtest \"a capitalized word\" => {\n  cmp-ok(\n      reverse-string(\"Ramen\"),\n      \"eq\",\n      \"nemaR\",\n      \"reverse once\",\n  );\n  cmp-ok(\n      reverse-string(reverse-string(\"Ramen\")),\n      \"eq\",\n      \"Ramen\",\n      \"reverse twice\",\n  );\n}"
+    },
+    {
+      "message": "# Subtest: a sentence with punctuation\n# Failed test 'reverse once'\n# at /solution/leap.rakutest line 52\n# expected: \"!yrgnuh m'I\"\n#  matcher: 'infix:<eq>'\n#      got: \"I'm hungry!\"\n# You failed 1 test of 2\n# Failed test 'a sentence with punctuation'\n# at /solution/leap.rakutest line 51\n",
+      "name": "a sentence with punctuation",
+      "status": "fail",
+      "test_code": "subtest \"a sentence with punctuation\" => {\n  cmp-ok(\n      reverse-string(\"I'm hungry!\"),\n      \"eq\",\n      \"!yrgnuh m'I\",\n      \"reverse once\",\n  );\n  cmp-ok(\n      reverse-string(reverse-string(\"I'm hungry!\")),\n      \"eq\",\n      \"I'm hungry!\",\n      \"reverse twice\",\n  );\n}"
+    },
+    {
+      "name": "a palindrome",
+      "status": "pass",
+      "test_code": "subtest \"a palindrome\" => {\n  cmp-ok(\n      reverse-string(\"racecar\"),\n      \"eq\",\n      \"racecar\",\n      \"reverse once\",\n  );\n  cmp-ok(\n      reverse-string(reverse-string(\"racecar\")),\n      \"eq\",\n      \"racecar\",\n      \"reverse twice\",\n  );\n}"
+    },
+    {
+      "message": "# Subtest: an even-sized word\n# Failed test 'reverse once'\n# at /solution/leap.rakutest line 82\n# expected: \"reward\"\n#  matcher: 'infix:<eq>'\n#      got: \"drawer\"\n# You failed 1 test of 2\n# Failed test 'an even-sized word'\n# at /solution/leap.rakutest line 81\n# You failed 4 tests of 6\n",
+      "name": "an even-sized word",
+      "status": "fail",
+      "test_code": "subtest \"an even-sized word\" => {\n  cmp-ok(\n      reverse-string(\"drawer\"),\n      \"eq\",\n      \"reward\",\n      \"reverse once\",\n  );\n  cmp-ok(\n      reverse-string(reverse-string(\"drawer\")),\n      \"eq\",\n      \"drawer\",\n      \"reverse twice\",\n  );\n}"
+    }
+  ],
+  "version": 3
+}

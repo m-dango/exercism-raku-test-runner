@@ -32,10 +32,14 @@ mkdir -p "${output_dir}"
 echo "${slug}: testing..."
 
 # Run the tests and transform to results
-test_file="${input_dir}/${slug}.rakutest"
+if [ -f "${input_dir}/t/${slug}.rakutest" ]; then
+    test_file="${input_dir}/t/${slug}.rakutest"
+else
+    test_file="${input_dir}/${slug}.rakutest"
+fi
 chmod +x $test_file
 export HOME='/tmp'
-$test_file 2>&1 | tap-parser -j 0 > "${output_dir}/tap.json"
+raku -I "${input_dir}/lib" $test_file 2>&1 | tap-parser -j 0 > "${output_dir}/tap.json"
 bin/transform-results.raku --tap-results="${output_dir}/tap.json" --output-file="${results_file}" --test-file=$test_file
 
 echo "${slug}: done"

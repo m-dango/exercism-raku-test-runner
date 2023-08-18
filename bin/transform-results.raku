@@ -12,23 +12,26 @@ my Str:D  $output = '';
 my Bool:D $take   = False;
 my Str:D  @case;
 my Str    $case-id;
+my Int    $task_id;
 
-my %results = :status<error>, :message(Nil), :version(2), :tests([]);
+my %results = :status<error>, :message(Nil), :version(3), :tests([]);
 
 for $test-file.IO.lines(:!chomp) -> $line {
-    if $line ~~ /:r :!s '# ' ['begin' || 'case'] ': ' (\S+)/ {
+    if $line ~~ /:r :!s '# ' ['begin' || 'case'] ': ' (\S+) [\s+ 'task: ' (\d+)]? / {
         $take    = True;
         $case-id = $/[0].Str;
+        $task_id = .Int with $/[1];
     }
 
     if $take {
-        @case.push($line.subst(/' # ' \w+ ': ' $case-id/, ''));
+        @case.push($line.subst(/' # ' \w+ ': ' $case-id .*/, "\n"));
 
         if $line ~~ /:r :!s '# ' ['end' || 'case'] ': ' $case-id/ {
             $take = False;
             %results<tests>.push((
                 :test_code(@case.join.trim),
                 :status<error>,
+                $task_id ?? :$task_id !! Empty,
             ).Hash);
             @case    = Empty;
             $case-id = Nil;
@@ -36,13 +39,18 @@ for $test-file.IO.lines(:!chomp) -> $line {
     }
 }
 
-my $i = 0;
+my UInt:D $i = 0;
+my Str:D  $subtest = '';
 for from-json($tap-results.IO.slurp).List -> @part {
     given @part[0] {
         when 'comment' {
             if %results<tests>[$i-1]<status> eq 'fail' {
                 %results<tests>[$i-1]<message> ~= @part[1];
             }
+        }
+        
+        when 'child' {
+            $subtest = @part[1].grep({.[0] eq 'comment'}).map({.[1]}).join;
         }
 
         when 'extra' {
@@ -53,9 +61,16 @@ for from-json($tap-results.IO.slurp).List -> @part {
             given %results<tests>[$i++] -> %test {
                 %test<name>   = @part[1]<name>;
                 %test<output> = $output.chars <= 500 ?? $output !! ($output.substr(0, 500) ~ '... Output was truncated. Please limit to 500 chars.') if $output;
-                %test<status> = (@part[1]<ok> ?? 'pass' !! 'fail' );
-            };
-            $output = '';
+                if @part[1]<ok> {
+                    %test<status> = 'pass';
+                }
+                else {
+                    %test<message> ~= $subtest;
+                    %test<status> = 'fail';
+                }
+            }
+            $output  = '';
+            $subtest = '';
         }
 
         when 'bailout' {
