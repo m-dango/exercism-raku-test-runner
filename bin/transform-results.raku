@@ -1,6 +1,7 @@
 #!/usr/bin/env raku
 
 use JSON::Fast;
+use Terminal::ANSIColor;
 
 unit sub MAIN (
     Str:D :$test-file,
@@ -60,7 +61,13 @@ for from-json($tap-results.IO.slurp).List -> @part {
         when 'assert' {
             given %results<tests>[$i++] -> %test {
                 %test<name>   = @part[1]<name>;
-                %test<output> = $output.chars <= 500 ?? $output !! ($output.substr(0, 500) ~ '... Output was truncated. Please limit to 500 chars.') if $output;
+
+                if $output {
+                    %test<output> = colorstrip($output).chars <= 500
+                      ?? $output
+                      !! (colorstrip($output).substr(0, 500) ~ '... Output was truncated. Please limit to 500 chars.');
+                }
+
                 if @part[1]<ok> {
                     %test<status> = 'pass';
                 }
